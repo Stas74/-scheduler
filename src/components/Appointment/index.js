@@ -7,15 +7,16 @@ import "./styles.scss";
 
 export default function Appointment(props) {
   
-  console.log("Appointment interview", props.interview);
+  // console.log("Appointment interview", props.interview);
   
-  const formatTime = (props) => {
-    if (!props.time) {
-      return "No Appointments";
-    } else {
-      return `Appointments at ${props.time}`;
-    }
-  };
+  // const formatTime = (props) => {
+  //   if (!props.time) {
+  //     return "No Appointments";
+  //   } else {
+  //     return `Appointments at ${props.time}`;
+  //   }
+  // };
+
   // {props.time ? `Appointments at ${props.time}` : "No Appointments"}
   // {formatTime(props)}
   return (
