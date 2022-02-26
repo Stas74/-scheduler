@@ -5,6 +5,7 @@ import "components/Application.scss";
 import DayList from "./DayList";
 import "components/Appointment";
 import Appointment from "components/Appointment";
+import getAppointmentsForDay from "../helpers/selectors";
 
 // const appointments = [
 //   {
@@ -53,24 +54,36 @@ export default function Application(props) {
   // const [day, setDay] = useState("Monday");
   // const [days, setDays] = useState([]);
   const setDay = day => setState({ ...state, day });
-  const setDays = (days) => setState(prev => ({ ...prev, days }));
-
+  // const setDays = (days) => setState(prev => ({ ...prev, days }));
+  
   const [state, setState] = useState({
     day: "Monday",
     days: [],
-    // appointments: {}
+    appointments: {}
   })
-
+  const dailyAppointments = getAppointmentsForDay(state, state.day); //  getAppointmentsForDay(state, state.day)
+  
   useEffect(() => {
-    axios.get("/api/days").then((response) => {      
-      setDays(response.data);
+    Promise.all([
+      axios.get('api/days'),
+      axios.get('/api/appointments'),
+      // axios.get('api/interviewers')
+    ]).then((all) => {
+      console.log("all[1].data", all[1].data)
+      setState(prev => (
+        {...prev, days: all[0].data, appointments: all[1].data }
+      ));
     });
   }, []);
+  
+  
 
-  const listAppointments = appointments.map((appointment) => (
+  const listAppointments = dailyAppointments.map((appointment) => (
     <Appointment key={appointment.id} {...appointment} />
-  ));
-  console.log("Spread", { ...listAppointments });
+    ));
+
+    // console.log("Spread", { ...listAppointments });
+    
   return (
     <main className="layout">
       <section className="sidebar">
@@ -79,7 +92,7 @@ export default function Application(props) {
           className="sidebar--centered"
           src="images/logo.png"
           alt="Interview Scheduler"
-        />
+          />
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
           <DayList days={state.days} value={state.day} onChange={setDay} />
