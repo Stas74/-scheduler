@@ -7,12 +7,16 @@ const getAppointmentsForDay = (state, day) => {
 };
 
 const getInterviewersForDay = (state, day) => {
-
+  const newState = [];
   const dayObjInterviewers = state.days.find((elem) => elem.name === day);
 
-  if (dayObjInterviewers === undefined) return []; 
-
-  return dayObjInterviewers.interviewers.map((int) => state.interviewers[int]);  
+  if (dayObjInterviewers) {
+    dayObjInterviewers.interviewers.map((int) => {
+      
+      return newState.push(state.interviewers[int]);
+    });
+  }
+  return newState;
 };
 
 const getInterview = (state, interview) => {
