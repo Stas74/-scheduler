@@ -13,14 +13,13 @@ export default function Application(props) {
   // const [day, setDay] = useState("Monday");
   // const [days, setDays] = useState([]);
   // const setDays = (days) => setState(prev => ({ ...prev, days }));
-  
 
   const setDay = (day) => setState({ ...state, day });
   const [state, setState] = useState({
     day: "Monday",
     days: [],
     appointments: {},
-    interviewers: {}
+    interviewers: {},
   });
 
   const dailyAppointments = getAppointmentsForDay(state, state.day);
@@ -30,20 +29,17 @@ export default function Application(props) {
     // console.log(bookInterview, id, interview);
     const appointment = {
       ...state.appointments[id],
-      interview: { ...interview }
+      interview: { ...interview },
     };
     const appointments = {
       ...state.appointments,
-      [id]: appointment
+      [id]: appointment,
     };
 
-    setState({
-      ...state,
-      appointments
-    });
-
+    return axios
+      .put(`/api/appointments/${id}`, { interview: { ...interview } })
+      .then(setState({ ...state, appointments }));
   }
-  
 
   const listAppointments = dailyAppointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
@@ -70,7 +66,7 @@ export default function Application(props) {
         ...prev,
         days: all[0].data,
         appointments: all[1].data,
-        interviewers: all[2].data
+        interviewers: all[2].data,
       }));
     });
   }, []);
