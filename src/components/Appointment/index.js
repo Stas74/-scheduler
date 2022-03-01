@@ -2,34 +2,33 @@ import React from "react";
 import Header from "./Header";
 import Show from "./Show";
 import Empty from "./Empty";
+import useVisualMode from "../../hooks/useVisualMode";
 
 import "./styles.scss";
+import Form from "./Form";
 
 export default function Appointment(props) {
-  
-  // console.log("Appointment interview", props.interview);
-  
-  // const formatTime = (props) => {
-  //   if (!props.time) {
-  //     return "No Appointments";
-  //   } else {
-  //     return `Appointments at ${props.time}`;
-  //   }
-  // };
+  const EMPTY = "EMPTY";
+  const SHOW = "SHOW";
+  const CREATE = "CREATE";
 
-  // {props.time ? `Appointments at ${props.time}` : "No Appointments"}
-  // {formatTime(props)}
+  // console.log("Appointment(props)", props)
+
+  const { mode, transition, back } = useVisualMode(
+    props.interview ? SHOW : EMPTY
+  );  
+
   return (
     <article className="appointment">
       <Header time={props.time} />
-      {props.interview ? (
+      {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
+      {mode === SHOW && (
         <Show
           student={props.interview.student}
           interviewer={props.interview.interviewer}
         />
-      ) : (
-        <Empty />
       )}
+      {mode === CREATE && (<Form onCancel={() => back(EMPTY)} />)}
       {/* {props.interview ? <Appointment /> : <Empty />} */}
     </article>
   );
