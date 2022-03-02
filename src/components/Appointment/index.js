@@ -16,6 +16,7 @@ export default function Appointment(props) {
   const SAVING = "SAVING";
   const DELETING = "DELETING";
   const CONFIRM = "CONFIRM";
+  const EDIT = "EDIT";
 
   // console.log("Appointment(props.interview)", props.interview);
 
@@ -49,6 +50,7 @@ export default function Appointment(props) {
           student={props.interview.student}
           interviewer={props.interview.interviewer}
           onDelete={() => transition(CONFIRM)}
+          onEdit={() => transition(EDIT)}
         />
       )}
       {mode === CREATE && (
@@ -67,6 +69,14 @@ export default function Appointment(props) {
           save={save}
           onConfirm={() => deleteAppo(props.id)}
         />
+      )}
+      {mode === EDIT && (
+        <Form
+        interview={props.interview}
+        interviewers={props.dailyInterviewers}
+        onCancel={() => back()}
+        onSave={save}
+      />
       )}
     </article>
   );
