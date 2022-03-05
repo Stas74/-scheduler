@@ -8,9 +8,6 @@ export default function InterviewerListItem(props) {
     "interviewers__item--selected": props.selected,
   });
 
-  // const setInterviewerHandler = () => {
-  //   props.setInterviewer(props.id);
-  // };
   return (
     <li
       className={interviewerClass}

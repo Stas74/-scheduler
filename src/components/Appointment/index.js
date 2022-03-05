@@ -19,9 +19,7 @@ export default function Appointment(props) {
   const CONFIRM = "CONFIRM";
   const EDIT = "EDIT";
   const ERROR_SAVE = "ERROR_SAVE";
-  const ERROR_DELETE = "ERROR_DELETE";
-
-  // console.log("Appointment(props.interview)", props.interview);
+  const ERROR_DELETE = "ERROR_DELETE";  
 
   function save(name, interviewer) {
     const interview = {
@@ -29,8 +27,7 @@ export default function Appointment(props) {
       interviewer,
     };
 
-    transition(SAVING);
-    console.log("save interview", interview);
+    transition(SAVING);    
     props
       .bookInterview(props.id, interview)
       .then(() => transition(SHOW))
@@ -39,7 +36,6 @@ export default function Appointment(props) {
 
   function deleteAppo(id) {
     transition(DELETING, true);
-    console.log("delete appointment inside");
     props
       .cancelInterview(id)
       .then(() => transition(EMPTY))

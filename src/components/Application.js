@@ -32,7 +32,6 @@ export default function Application(props) {
     }
   );
 
-  // console.log("Spread", { ...listAppointments });
 
   return (
     <main className="layout">
