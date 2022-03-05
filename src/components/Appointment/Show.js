@@ -1,8 +1,6 @@
 import React from "react";
 
-export default function Show(props) {
-  // console.log("Show props", props)
-  // const name = props.interviewer && props.interviewer.name || ""
+export default function Show(props) { 
   let name = "";
   if (props.interviewer) {
     name = props.interviewer.name;
