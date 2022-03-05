@@ -5,6 +5,17 @@ Additional options: delete the selected interview, edit the selected interview (
 
 ## Images
 
+### App main page
+
+![Overview](https://github.com/Stas74/scheduler/blob/master/pictures/Overview.PNG)
+
+### App overview and functionality
+
+![Overview ](https://github.com/Stas74/scheduler/blob/master/pictures/Overview%20animation.gif)
+
+### Edit and Delete functions
+
+![Edit and Delete ](https://github.com/Stas74/scheduler/blob/master/pictures/Edit%20and%20Delete%20animation.gif)
 
 ## Setup
 
